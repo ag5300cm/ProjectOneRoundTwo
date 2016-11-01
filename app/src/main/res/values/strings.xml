@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ProjectOneRoundTwo</string>
+
+    <string name="notes_textview">Notes!</string>
+    <string name="button_add_text">Add</string>
+
+</resources>
