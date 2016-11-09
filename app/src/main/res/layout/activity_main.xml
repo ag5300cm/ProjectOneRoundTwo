@@ -10,12 +10,27 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.meghan.projectoneroundtwo.MainActivity">
 
+    <Button
+        android:id="@+id/button_add_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_add_text"
+        />
+
+    <Button
+        android:id="@+id/button_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_search_text"
+        android:layout_toRightOf="@id/button_add_text"
+        />
 
     <TextView
         android:id="@+id/notes_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/notes_textview"/>
+        android:text="@string/notes_textview"
+        android:layout_below="@+id/button_add_text"/>
 
     <EditText
         android:id="@+id/notes_edittext"
@@ -24,19 +39,12 @@
         android:layout_below="@+id/notes_textview"
         />
 
-    <Button
-        android:id="@+id/button_add_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/notes_edittext"
-        android:text="@string/button_add_text"
-        />
-
     <ListView
         android:id="@+id/listview_notes"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/button_add_text">
+        android:layout_below="@+id/notes_edittext">
     </ListView>
+
 
 </RelativeLayout>

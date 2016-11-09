@@ -7,14 +7,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    //TODO add check 100 character shortening, search button and camera aspects.
+    //TODO add search button and camera aspects.
 
     private static final String TAG = "NOTES ACTIVITY";
     DatabaseManager dbManager;
@@ -23,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     ListView listView; //initializing listView
     Button addNotes_btn; //button to add notes
     String addNotes_text; //String to retain added notes till put in list
+    Button searchText_btn;
 
     Date date = new Date(); //Date variable
 
@@ -40,7 +44,9 @@ public class MainActivity extends AppCompatActivity {
         final ArrayList<String> displayList = new ArrayList(); //list to show 100 characaters or less
         listView = (ListView) findViewById(R.id.listview_notes); //List view and where to put the list
 
-        Cursor cursor = dbManager.getAllNotes();
+        searchText_btn = (Button) findViewById(R.id.button_search);
+
+        final Cursor cursor = dbManager.getAllNotes();
         cursorListAdapter = new NotesCursorAdapter(this, cursor, true);
         listView.setAdapter(cursorListAdapter);
 
@@ -79,6 +85,58 @@ public class MainActivity extends AppCompatActivity {
                 //String combinedTextandDate = newItemText + " " + timeStamp;
             }
         });
+
+        searchText_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //List<String> listClone = new ArrayList<String>();
+                String searchNote = addNotes_editText.getText().toString();
+                if ( searchNote.equals("")) {
+                    Toast.makeText(MainActivity.this, "Could not find.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                //TODo figure out a search attribute, write a database sql, and return me all the things that match
+                //get cursor back from that and then tell the list to refresh.
+
+                dbManager.getMatchingNotes(searchNote);
+                cursorListAdapter.changeCursor(dbManager.getMatchingNotes(searchNote));
+
+
+                //cursorListAdapter.changeCursor(dbManager.getAllNotes());
+
+
+//                String searchingNote = searchNote;
+//                for (String searchingNote : listView) {
+//
+//                }
+//
+                //testing to see if this works
+                //Cursor mCur = Cursor(this);
+//                public Cursor getTestingData(String s, Objects o) {
+//                    try {
+//
+//                        Cursor mCur = dbManager.rawQuery()
+//                    }
+//                }
+
+//                String query = "" + searchNote;
+//                Cursor cursor1 = dbManager.equals(cursor);
+//
+//                if (null != cursor1)
+//                    cursor1.moveToFirst();
+//
+//                String output = cursor1.getString(1);
+
+
+                /*
+                if (cursor.moveToFirst()) {
+                    if (searchNote = cursor.getString());
+                }
+                */
+            }
+        });
+
     }
 
     @Override //Closes the Database when app is paused

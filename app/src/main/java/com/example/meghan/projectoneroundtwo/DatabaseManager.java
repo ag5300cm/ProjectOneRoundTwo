@@ -41,6 +41,14 @@ public class DatabaseManager {
         return cursor;
     }
 
+    public Cursor getMatchingNotes(String textToMatch) { //used for searching text
+
+        String where = NOTES_NAME_COL + " like '%" + textToMatch + "%'";
+        Cursor matchingTextCursor = db.query(DB_TABLE, null, where, null, null, null, null);
+        //matchingTextCursor.moveToFirst();
+        return matchingTextCursor;
+    }
+
 
     // Add a NOTE to the database.
     // Returns true if movie added, false if movie is already in the database
@@ -71,7 +79,7 @@ public class DatabaseManager {
         public void onCreate(SQLiteDatabase db) {
             String createSQLbase = "CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT UNIQUE )";
 
-            String createSQL = String.format(createSQLbase, DB_TABLE, ID_COL, NOTES_NAME_COL); //added
+            String createSQL = String.format(createSQLbase, DB_TABLE, ID_COL, NOTES_NAME_COL); //columns created
             db.execSQL(createSQL);
         }
 

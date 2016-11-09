@@ -3,5 +3,5 @@
 
     <string name="notes_textview">Notes!</string>
     <string name="button_add_text">Add</string>
-
+    <string name="button_search_text">Search</string>
 </resources>
